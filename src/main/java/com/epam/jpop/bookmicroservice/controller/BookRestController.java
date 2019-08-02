@@ -3,6 +3,8 @@ package com.epam.jpop.bookmicroservice.controller;
 import com.epam.jpop.bookmicroservice.exceptions.NoObjectFoundException;
 import com.epam.jpop.bookmicroservice.model.Book;
 import com.epam.jpop.bookmicroservice.services.BookService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,11 +14,12 @@ import java.util.List;
 public class BookRestController {
 
     @Autowired
-    BookService theBookService;
+    private BookService theBookService;
+
+
 
     @GetMapping("/books")
     public List<Book> getAllBooks(){
-       // log.info("returned all books stored in stash");
         return theBookService.getAllBooks();
     }
 

@@ -2,7 +2,7 @@ package com.epam.jpop.bookmicroservice.services;
 
 import com.epam.jpop.bookmicroservice.exceptions.NoObjectFoundException;
 import com.epam.jpop.bookmicroservice.model.Book;
-import com.epam.jpop.bookmicroservice.repository.BookRepositiry;
+import com.epam.jpop.bookmicroservice.repository.BookRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import java.util.Optional;
 @Service
 public class BookService {
     @Autowired
-    BookRepositiry bookRepo;
+    BookRepository bookRepo;
 
     Logger log= LoggerFactory.getLogger(BookService.class);
 
