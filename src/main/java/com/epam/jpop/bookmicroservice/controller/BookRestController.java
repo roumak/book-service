@@ -1,54 +1,46 @@
 package com.epam.jpop.bookmicroservice.controller;
 
+import com.epam.jpop.bookmicroservice.dto.BookDto;
 import com.epam.jpop.bookmicroservice.exceptions.NoObjectFoundException;
-import com.epam.jpop.bookmicroservice.model.Book;
 import com.epam.jpop.bookmicroservice.services.BookService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
+@RequestMapping(path = "/api")
 public class BookRestController {
 
     @Autowired
     private BookService theBookService;
 
-
-
     @GetMapping("/books")
-    public List<Book> getAllBooks(){
-        return theBookService.getAllBooks();
+    public ResponseEntity<Object> getAllBooks(){
+        return  new ResponseEntity<>(theBookService.getAllBooks(), HttpStatus.OK);
     }
 
     @GetMapping("/books/{book_id}")
-    public Book getBookById(@PathVariable("book_id") final Long bookId)throws NoObjectFoundException{
-        return theBookService.getBookById(bookId);
+    public ResponseEntity<Object> getBookById(@PathVariable("book_id") final Long bookId)throws NoObjectFoundException{
+        return new ResponseEntity<>(theBookService.getBookById(bookId),HttpStatus.OK);
     }
 
     @PostMapping("/books")
-    public Book addBook(@RequestBody Book newBook){
-        return theBookService.saveBook(newBook);
+    public ResponseEntity<BookDto> addBook(@RequestBody BookDto newBook){
+        return new ResponseEntity<>(theBookService.saveBook(newBook),HttpStatus.OK);
     }
 
     @DeleteMapping("/books/{book_id}")
-    public String deleteBookById(@PathVariable("book_id") Long bookId){
-        String resp;
-        boolean isSuccessflag= theBookService.deleteBookById(bookId);
-        if(isSuccessflag){
-            resp= "Book id: <h4>"+bookId+"</h4> is deleted";
-        }else{
-            resp= "Exception occured, book couldnt be deleted";
-        }
+    public ResponseEntity<Object> deleteBookById(@PathVariable("book_id") Long bookId){
+        ResponseEntity<Object> resp = new ResponseEntity<>("deleted",HttpStatus.OK);
+        theBookService.deleteBookById(bookId);
         return resp;
     }
 
     @PutMapping("/books/{book_id}")
-    public Book updateBookById(@PathVariable("book_id") Long bookId,@RequestBody Book newBook){
+    public ResponseEntity<Object> updateBookById(@PathVariable("book_id") Long bookId,@RequestBody BookDto newBook){
         newBook.setBookId(bookId);
-        return theBookService.updateBook(newBook);
+        return new ResponseEntity<>(theBookService.updateBook(newBook),HttpStatus.OK);
     }
 
 
