@@ -1,11 +1,14 @@
 package com.epam.jpop.bookmicroservice.services;
 
+import com.epam.jpop.bookmicroservice.dto.BookDto;
 import com.epam.jpop.bookmicroservice.exceptions.NoObjectFoundException;
 import com.epam.jpop.bookmicroservice.model.Book;
 import com.epam.jpop.bookmicroservice.repository.BookRepository;
+import com.epam.jpop.bookmicroservice.util.ObjectConverterUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -18,40 +21,37 @@ public class BookService {
     @Autowired
     BookRepository bookRepo;
 
-    Logger log= LoggerFactory.getLogger(BookService.class);
+    private Logger log = LoggerFactory.getLogger(BookService.class);
 
-    public List<Book> getAllBooks(){
-        List<Book> allBooks =  bookRepo.findAll();
-        log.info("Retrieving all books",allBooks);
-       return Collections.unmodifiableList(allBooks);
+    public List<BookDto> getAllBooks() {
+        List<Book> allBooks = bookRepo.findAll();
+        log.info("Retrieving all books", allBooks);
+        return ObjectConverterUtil.convertAll(Collections.unmodifiableList(allBooks),
+                BookDto.class);
     }
 
-    public Book getBookById(Long bookId)throws  NoObjectFoundException{
-       Optional<Book> retrievedBookOptional= bookRepo.findById(bookId);
-       retrievedBookOptional.orElseThrow( () -> new NoObjectFoundException("No book found with this book id"));
-       return retrievedBookOptional.get();
-    }
-    public Book saveBook(Book newBook){
-            newBook.setBookId(null);
-           Book addedBook= bookRepo.saveAndFlush(newBook);
-           log.info("added new book to db",addedBook);
-           return addedBook;
+    public BookDto getBookById(Long bookId) throws NoObjectFoundException{
+        Optional<Book> retrievedBookOptional = bookRepo.findById(bookId);
+
+            return ObjectConverterUtil.convert(retrievedBookOptional.orElseThrow(()-> new NoObjectFoundException("No object found with this ID")), BookDto.class);
+
     }
 
-    public boolean deleteBookById(long bookId){
-       try{
-           bookRepo.deleteById(bookId);
-           return true;
-       }catch (Exception e){
-           log.error(e.getMessage());
-           return false;
-       }
+    public BookDto saveBook(BookDto newBook) {
+        newBook.setBookId(null);
+        Book addedBook = bookRepo.saveAndFlush(ObjectConverterUtil.convert(newBook, Book.class));
+        log.info("added new book to db", addedBook);
+        return ObjectConverterUtil.convert(addedBook, BookDto.class);
     }
 
-    public Book updateBook(Book book){
-        log.info("updating book, bookId"+ book.getBookId());
-        Book addedBook= bookRepo.saveAndFlush(book);
-        return addedBook;
+    public void deleteBookById(long bookId) throws EmptyResultDataAccessException {
+        bookRepo.deleteById(bookId);
+    }
+
+    public BookDto updateBook(BookDto book) {
+        log.info("updating book, bookId" + book.getBookId());
+        Book addedBook = bookRepo.saveAndFlush(ObjectConverterUtil.convert(book, Book.class));
+        return ObjectConverterUtil.convert(addedBook, BookDto.class);
     }
 
 
