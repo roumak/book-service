@@ -1,7 +1,6 @@
 package com.epam.jpop.bookmicroservice.controller;
 
 import com.epam.jpop.bookmicroservice.dto.BookDto;
-import com.epam.jpop.bookmicroservice.exceptions.NoObjectFoundException;
 import com.epam.jpop.bookmicroservice.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +20,7 @@ public class BookRestController {
     }
 
     @GetMapping("/books/{book_id}")
-    public ResponseEntity<Object> getBookById(@PathVariable("book_id") final Long bookId)throws NoObjectFoundException{
+    public ResponseEntity<Object> getBookById(@PathVariable("book_id") final Long bookId){
         return new ResponseEntity<>(theBookService.getBookById(bookId),HttpStatus.OK);
     }
 
