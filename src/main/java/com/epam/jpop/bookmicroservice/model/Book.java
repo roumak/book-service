@@ -1,16 +1,18 @@
 package com.epam.jpop.bookmicroservice.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "book")
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-@Data
 @Builder
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,5 +30,4 @@ public class Book {
 
     @Column(name = "desciption")
     private String description;
-
 }

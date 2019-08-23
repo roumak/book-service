@@ -46,7 +46,7 @@ public class ControllerTest {
 
     @Test
     public void getAllBooks()throws Exception{
-        Book book1=Book.builder().bookId(1L).bookName("Scion of iksavaku").authorName("Amish Tripathi")
+        Book book1=Book.builder().bookId(1L).bookName("Scion of iksavaku").authorName("Aamish Tripathi")
                 .category("Fiction").description("").build();
         Book book2=Book.builder().bookId(2L).bookName("The Man and his times").authorName("Sam Manekshaw")
                 .category("Autobioraphy").description("Story of himself").build();
