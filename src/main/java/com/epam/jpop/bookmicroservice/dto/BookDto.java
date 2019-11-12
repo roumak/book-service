@@ -14,17 +14,23 @@ import javax.validation.constraints.Size;
 @Getter
 @Builder
 public class BookDto {
+    @NotNull
+    @NotEmpty
     private Long bookId;
 
     @NotNull
     @NotEmpty
     @Size(min = 2,max = 40,message = "book name should be between 2 and 40")
-    private String bookName;
+    private String bookTitle;
+
+    @NotNull
+    @NotEmpty
+    private int count;
 
     @NotNull
     @NotEmpty
     @Size(min = 2,max = 40,message = "author name should be between 2 and 40")
-    private String authorName;
+    private String author;
 
     @Size(min = 1,max = 30, message = "category must be between 1 and 30")
     private String category;
@@ -34,7 +40,7 @@ public class BookDto {
 
     @Override
     public String toString(){
-        return bookName+" "+authorName+" "+category;
+        return bookTitle+" "+author+" "+category;
     }
 
 }

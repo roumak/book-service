@@ -30,10 +30,10 @@ public class BookService {
                 BookDto.class);
     }
 
-    public BookDto getBookById(Long bookId) throws NoObjectFoundException{
+    public BookDto getBookById(Long bookId) throws NoObjectFoundException {
         Optional<Book> retrievedBookOptional = bookRepo.findById(bookId);
 
-            return ObjectConverterUtil.convert(retrievedBookOptional.orElseThrow(()-> new NoObjectFoundException("No object found with this ID")), BookDto.class);
+        return ObjectConverterUtil.convert(retrievedBookOptional.orElseThrow(() -> new NoObjectFoundException("No object found with this ID")), BookDto.class);
 
     }
 
