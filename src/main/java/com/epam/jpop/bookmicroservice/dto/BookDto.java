@@ -21,7 +21,7 @@ public class BookDto {
     @NotNull
     @NotEmpty
     @Size(min = 2,max = 40,message = "book name should be between 2 and 40")
-    private String bookTitle;
+    private String bookName;
 
     @NotNull
     @NotEmpty
