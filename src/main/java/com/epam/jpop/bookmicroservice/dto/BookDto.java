@@ -40,7 +40,7 @@ public class BookDto {
 
     @Override
     public String toString(){
-        return bookTitle+" "+author+" "+category;
+        return bookName+" "+author+" "+category;
     }
 
 }
