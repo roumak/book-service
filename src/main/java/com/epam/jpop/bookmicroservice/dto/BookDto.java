@@ -20,7 +20,7 @@ public class BookDto {
 
     @NotNull
     @NotEmpty
-    @Size(min = 2,max = 40,message = "book name should be between 2 and 40")
+    @Size(min = 2, max = 40, message = "book name should be between 2 and 40")
     private String bookName;
 
     @NotNull
@@ -29,18 +29,18 @@ public class BookDto {
 
     @NotNull
     @NotEmpty
-    @Size(min = 2,max = 40,message = "author name should be between 2 and 40")
-    private String author;
+    @Size(min = 2, max = 40, message = "author name should be between 2 and 40")
+    private String authorName;
 
-    @Size(min = 1,max = 30, message = "category must be between 1 and 30")
+    @Size(min = 1, max = 30, message = "category must be between 1 and 30")
     private String category;
 
     @Size(max = 150, message = "description must be less than 150 characters")
     private String description;
 
     @Override
-    public String toString(){
-        return bookName+" "+author+" "+category;
+    public String toString() {
+        return bookName + " " + authorName + " " + category;
     }
 
 }

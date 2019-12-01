@@ -1,4 +1,4 @@
-package com.epam.jpop.bookmicroservice;
+package com.epam.jpop.bookmicroservice.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +17,7 @@ import java.util.HashSet;
 @EnableSwagger2
 public class SwaggerConfig {
     private static final Contact AUTHOR_CONTACT;
-    private static final HashSet<String> PRODUCES_CONSUMES= new HashSet<>();
+    private static final HashSet<String> PRODUCES_CONSUMES = new HashSet<>();
 
     static {
         AUTHOR_CONTACT = new Contact("Roumak Chakraborty",
@@ -28,7 +28,7 @@ public class SwaggerConfig {
     }
 
     @Bean
-    public Docket apiDoc(){
+    public Docket apiDoc() {
         return new Docket(DocumentationType.SWAGGER_2).select()
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
@@ -39,8 +39,8 @@ public class SwaggerConfig {
     }
 
     private ApiInfo apiMetaData() {
-        return new ApiInfo("Book service","It is a user microservice that interact with other components",
-                "v1.0","",AUTHOR_CONTACT,"Apache 2.0",
+        return new ApiInfo("Book service", "It is a user microservice that interact with other components",
+                "v1.0", "", AUTHOR_CONTACT, "Apache 2.0",
                 "http://www.apache.org/licenses/LICENSE-2.0", new ArrayList<>());
     }
 

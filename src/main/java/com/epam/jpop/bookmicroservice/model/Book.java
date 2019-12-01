@@ -9,18 +9,19 @@ import java.sql.Date;
 
 @Entity
 @Table(name = "book")
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Builder
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "book_id")
     private Long bookId;
-    
+
     @Column(name = "book_count")
     private int bookCount;
 
@@ -36,7 +37,7 @@ public class Book {
     @Column(name = "desciption")
     private String description;
 
-    @Column(name="added_date")
+    @Column(name = "added_date")
     @CreationTimestamp
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Date procurementDate;

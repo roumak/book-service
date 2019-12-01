@@ -15,32 +15,29 @@ public class BookRestController {
     private BookService theBookService;
 
     @GetMapping("/books")
-    public ResponseEntity<Object> getAllBooks(){
-        return  new ResponseEntity<>(theBookService.getAllBooks(), HttpStatus.OK);
+    public ResponseEntity<Object> getAllBooks() {
+        return new ResponseEntity<>(theBookService.getAllBooks(), HttpStatus.OK);
     }
 
     @GetMapping("/books/{book_id}")
-    public ResponseEntity<Object> getBookById(@PathVariable("book_id") final Long bookId)throws NoObjectFoundException{
-        return new ResponseEntity<>(theBookService.getBookById(bookId),HttpStatus.OK);
+    public ResponseEntity<Object> getBookById(@PathVariable("book_id") final Long bookId) throws NoObjectFoundException {
+        return new ResponseEntity<>(theBookService.getBookById(bookId), HttpStatus.OK);
     }
 
     @PostMapping("/books")
-    public ResponseEntity<BookDto> addBook(@RequestBody BookDto newBook){
-        return new ResponseEntity<>(theBookService.saveBook(newBook),HttpStatus.OK);
+    public ResponseEntity<Object> addBook(@RequestBody BookDto newBook) {
+        return new ResponseEntity<>(theBookService.saveBook(newBook), HttpStatus.OK);
     }
 
     @DeleteMapping("/books/{book_id}")
-    public ResponseEntity<Object> deleteBookById(@PathVariable("book_id") Long bookId){
-        ResponseEntity<Object> resp = new ResponseEntity<>("deleted",HttpStatus.OK);
-        theBookService.deleteBookById(bookId);
-        return resp;
+    public ResponseEntity<Object> deleteBookById(@PathVariable("book_id") Long bookId) {
+        return new ResponseEntity<>(theBookService.deleteBookById(bookId), HttpStatus.OK);
     }
 
     @PutMapping("/books/{book_id}")
-    public ResponseEntity<Object> updateBookById(@PathVariable("book_id") Long bookId,@RequestBody BookDto newBook){
+    public ResponseEntity<Object> updateBookById(@PathVariable("book_id") Long bookId, @RequestBody BookDto newBook) {
         newBook.setBookId(bookId);
-        return new ResponseEntity<>(theBookService.updateBook(newBook),HttpStatus.OK);
+        return new ResponseEntity<>(theBookService.updateBook(newBook), HttpStatus.OK);
     }
-
 
 }
