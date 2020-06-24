@@ -1,8 +1,23 @@
 import React, { Component } from "react";
 
-import { Card, Button, Table } from "react-bootstrap";
+import { Card, Table } from "react-bootstrap";
+
+import Axios from "axios";
 
 export default class BookList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      books: [],
+    };
+  }
+
+  componentDidMount() {
+    Axios.get("http://localhost:7090/books").then((response) => {
+      this.setState({ books: response.data.books });
+    });
+  }
+
   render() {
     return (
       <Card className={"border border-dark bg-dark text-white"}>
@@ -20,17 +35,22 @@ export default class BookList extends Component {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>No</td>
-                <td>Books</td>
-                <td>Available</td>
-                <td>here</td>
-                <td>Now</td>
-              </tr>
-              <tr align="center">
-                <td colSpan="6">No books available</td>
-              </tr>
+              {this.state.books.length === 0 ? (
+                <tr align="center">
+                  <td colSpan="6">No books available</td>
+                </tr>
+              ) : (
+                this.state.books.map((book) => (
+                  <tr key={book.bookId}>
+                    <td>{book.bookId}</td>
+                    <td>{book.bookName}</td>
+                    <td>{book.authorName}</td>
+                    <td>{book.category}</td>
+                    <td>{book.description}</td>
+                    <td>{book.count}</td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </Table>
         </Card.Body>
