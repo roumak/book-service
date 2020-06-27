@@ -32,7 +32,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public String ValidatonException(ValidationException e) {
+    public String ValidationException(ValidationException e) {
         return e.getMessage();
     }
 

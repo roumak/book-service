@@ -39,7 +39,7 @@ public class SwaggerConfig {
     }
 
     private ApiInfo apiMetaData() {
-        return new ApiInfo("Book service", "It is a user microservice that interact with other components",
+        return new ApiInfo("Book service", "It is a book microservice that interact with other components",
                 "v1.0", "", AUTHOR_CONTACT, "Apache 2.0",
                 "http://www.apache.org/licenses/LICENSE-2.0", new ArrayList<>());
     }
