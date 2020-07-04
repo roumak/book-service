@@ -8,7 +8,7 @@
 		<version>2.1.5.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.thisrc</groupId>
+	<groupId>com.this_rc</groupId>
 	<artifactId>book-microservice</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>book-microservice</name>
@@ -101,7 +101,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<mainClass>com.epam.jpop.bookmicroservice.BookMicroserviceApplication</mainClass>
+					<mainClass>com.this_rc.bookmicroservice.BookMicroserviceApplication</mainClass>
 				</configuration>
 
 				<executions>
