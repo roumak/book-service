@@ -1,9 +1,9 @@
 package com.this_rc.bookmicroservice.services;
 
+import com.this_rc.bookmicroservice.dto.InternalBookDto;
 import com.this_rc.bookmicroservice.dto.Response;
 import com.this_rc.bookmicroservice.dto.BookSearchDto;
 import com.this_rc.bookmicroservice.exceptions.NoObjectFoundException;
-import com.this_rc.bookmicroservice.model.Book;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.function.Consumer;
+import java.math.BigDecimal;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -32,7 +32,7 @@ public class BookServiceTest  {
         Response book = bookService.getBookById(1L);
 
         Assert.assertEquals("isbn number changed",Long.valueOf("1101010000000"),book.getBook().getBookIsbn());
-        Assert.assertEquals("Book name changed","Scion of Iksavaku",book.getBook().getBookName());
+        Assert.assertEquals("Book name changed","Scion of Iksavaku",book.getBook().getBookTitle());
         Assert.assertEquals("Author name changed","Aamish Tripathi",book.getBook().getAuthorName());
         Assert.assertEquals("Category changed","Fiction",book.getBook().getCategory());
         Assert.assertEquals("book count changed",9,book.getBook().getCount());
@@ -40,7 +40,21 @@ public class BookServiceTest  {
 
     @Test
     public void SavingBook(){
+        Long ISBN= 1023234334545L;
+        InternalBookDto book= InternalBookDto.builder().bookIsbn(ISBN)
+                .bookTitle("Wings of fire")
+                .authorName("Arun Tiwari")
+                .category("Autobiography")
+                .description("It is an autobography of Dr. A.P.J Abdul Kalam")
+                .maxRetailPrice(BigDecimal.valueOf(200.00))
+                .count(75)
+                .build();
 
+        bookService.saveBook(book);
+        Response response=bookService.getBookByIsbn(ISBN);
+        Assert.assertEquals("ISBN did not match",ISBN,response.getBook().getBookIsbn());
+        Assert.assertEquals("Book title did not match","Wings of fire",response.getBook().getBookTitle());
+        Assert.assertEquals("Category did not match","Autobiography",response.getBook().getCategory());
     }
 
     @Test
