@@ -1,7 +1,7 @@
 package com.this_rc.bookmicroservice.controller;
 
 import com.this_rc.bookmicroservice.dto.BookSearchDto;
-import com.this_rc.bookmicroservice.dto.ExternalBookDto;
+import com.this_rc.bookmicroservice.dto.BookDto;
 import com.this_rc.bookmicroservice.dto.InternalBookDto;
 import com.this_rc.bookmicroservice.exceptions.NoObjectFoundException;
 import com.this_rc.bookmicroservice.services.BookService;
@@ -44,7 +44,7 @@ public class BookRestController {
     }
 
     @PutMapping("/{book_id}")
-    public ResponseEntity<Object> updateBookById(@PathVariable("book_id") Long bookId, @RequestBody ExternalBookDto newBook) {
+    public ResponseEntity<Object> updateBookById(@PathVariable("book_id") Long bookId, @RequestBody BookDto newBook) {
         newBook.setBookId(bookId);
         return new ResponseEntity<>(theBookService.updateBook(newBook), HttpStatus.OK);
     }

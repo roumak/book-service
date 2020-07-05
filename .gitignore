@@ -4,7 +4,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**
-
+src/book-webapp/node/
 ### STS ###
 .apt_generated
 .classpath

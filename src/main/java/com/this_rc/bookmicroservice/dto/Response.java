@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
+import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
@@ -13,10 +14,9 @@ import java.util.List;
 @ToString
 @Builder
 @Getter
-public class BookResponse {
-    List<ExternalBookDto> books;
-    ExternalBookDto book;
-    String message;
-
-
+public class Response {
+    private List<BookDto> books;
+    private BookDto book;
+    private HttpStatus httpStatus;
+    private String message;
 }

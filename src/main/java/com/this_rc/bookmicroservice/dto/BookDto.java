@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 @Setter
 @Getter
 @Builder
-public class ExternalBookDto {
+public class BookDto {
     @NotNull
     @NotEmpty
     private Long bookId;

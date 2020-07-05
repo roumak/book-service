@@ -1,6 +1,6 @@
 package com.this_rc.bookmicroservice.services;
 
-import com.this_rc.bookmicroservice.dto.BookResponse;
+import com.this_rc.bookmicroservice.dto.Response;
 import com.this_rc.bookmicroservice.dto.BookSearchDto;
 import com.this_rc.bookmicroservice.exceptions.NoObjectFoundException;
 import org.junit.Test;
@@ -23,7 +23,7 @@ public class BookServiceTest  {
                 .authorName("Aamish Tripathi")
                 .build();
 
-        BookResponse response=bookService.searchBooksByParameters(bookSearchDto);
+        Response response=bookService.searchBooksByParameters(bookSearchDto);
 
 //        assertEquals(response.getBooks().);
         System.out.println(bookSearchDto);
@@ -31,7 +31,7 @@ public class BookServiceTest  {
     }
     @Test
     public void getBookById() throws NoObjectFoundException {
-        BookResponse book = bookService.getBookById(1L);
+        Response book = bookService.getBookById(1L);
         System.out.println(book);
     }
 
