@@ -49,6 +49,14 @@ public class BookService {
         return Response.builder().book(bookDto).build();
     }
 
+    public Response getBookByIsbn(Long isbn){
+        Book book=theBookRepository.findByIsbn(isbn);
+
+        return Response.builder()
+                .book(ObjectConverterUtil.convert(book,BookDto.class))
+                .build();
+    }
+
     public Response saveBook(InternalBookDto newBook) {
         Book book = ObjectConverterUtil.convert(newBook, Book.class);
         log.info("\n" + book.toString() + "\n");
