@@ -30,7 +30,7 @@ public class InternalBookDto {
     @NotNull
     @NotEmpty
     @Size(max = 40, message = "book name should be between 2 and 40")
-    private String bookName;
+    private String bookTitle;
 
     @NotNull
     @NotEmpty

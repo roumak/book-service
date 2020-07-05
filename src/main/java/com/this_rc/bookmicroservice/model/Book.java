@@ -28,7 +28,7 @@ public class Book {
     private String bookIsbn;
 
     @Column(name = "book_title")
-    private String bookName;
+    private String bookTitle;
 
     @Column(name = "author_name")
     private String authorName;
@@ -61,7 +61,7 @@ public class Book {
                  @Nullable String authorName,
                  @Nullable String category){
         this.bookIsbn=bookIsbn;
-        this.bookName= bookName;
+        this.bookTitle= bookName;
         this.authorName = authorName;
         this.category = category;
     }

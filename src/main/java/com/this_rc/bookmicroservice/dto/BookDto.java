@@ -26,7 +26,7 @@ public class BookDto {
     @NotNull
     @NotEmpty
     @Size(max = 40, message = "book name should be between 2 and 40")
-    private String bookName;
+    private String bookTitle;
 
     @NotNull
     @NotEmpty
@@ -53,7 +53,7 @@ public class BookDto {
 
     @Override
     public String toString() {
-        return bookName + " " + authorName + " " + category;
+        return bookTitle + " " + authorName + " " + category;
     }
 
 }
