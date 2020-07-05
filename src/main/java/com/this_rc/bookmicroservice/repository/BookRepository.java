@@ -17,4 +17,5 @@ public interface BookRepository extends JpaRepository<Book, Long> {
             + "b.category=:category")
     List<Book> searchBookBy(String isbn, String bookName, String authorName, String category);
 
+    Book findByIsbn(Long isbn);
 }
