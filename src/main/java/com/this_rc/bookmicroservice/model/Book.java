@@ -33,6 +33,9 @@ public class Book {
     @Column(name = "author_name")
     private String authorName;
 
+    @Column(name = "book_type")
+    private String type;
+
     @Column(name="book_mrp")
     private BigDecimal maxRetailPrice;
 

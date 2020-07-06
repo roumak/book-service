@@ -34,6 +34,11 @@ public class BookDto {
     private String authorName;
 
     @NotNull
+    @NotEmpty
+    @Size(min = 5, max = 20, message = "type should be between 5 and 20")
+    private String type;
+
+    @NotNull
     @NotEmpty(message = "MRP must not be null or empty")
     private BigDecimal maxRetailPrice;
 
