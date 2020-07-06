@@ -50,7 +50,7 @@ public class BookService {
     }
 
     public Response getBookByIsbn(Long isbn){
-        Book book=theBookRepository.findByIsbn(isbn);
+        Book book=theBookRepository.findByBookIsbn(isbn);
 
         return Response.builder()
                 .book(ObjectConverterUtil.convert(book,BookDto.class))
