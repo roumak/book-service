@@ -18,7 +18,8 @@ public class BookRepositoryTest {
 
     @Test
     public void searchBookBasedOnAttribute() {
-     List<Book> books = bookRepository.searchBookBy(null,"Scion of Iksavaku", "Aamish Tripathi",null);
+     Book searchedBook = Book.builder().authorName("amish").build();
+     List<Book> books = bookRepository.searchBookBy(searchedBook);
         System.out.println(books);
     }
 }
