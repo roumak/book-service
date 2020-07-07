@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.lang.Nullable;
 
+import javax.validation.constraints.NotNull;
+
 @ApiModel(description = "Book search request")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,7 +23,7 @@ public class BookSearchDto {
     private String bookIsbn;
 
     @Nullable
-    private String bookName;
+    private String bookTitle;
 
     @Nullable
     private String authorName;
@@ -31,11 +33,18 @@ public class BookSearchDto {
 
     @Override
     public String toString() {
-        return "BookSearchRequest{" +
+        return "BookSearchRequest {" +
                 "bookIsbn='" + bookIsbn + '\'' +
-                ", bookName='" + bookName + '\'' +
+                ", bookName='" + bookTitle + '\'' +
                 ", authorName='" + authorName + '\'' +
                 ", categories='" + categories + '\'' +
                 '}';
+    }
+
+    public boolean isEmpty() {
+        return  bookIsbn == null
+                && bookTitle == null
+                && authorName == null
+                && categories == null;
     }
 }
