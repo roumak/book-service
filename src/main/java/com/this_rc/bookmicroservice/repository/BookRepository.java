@@ -6,16 +6,23 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
 
-    @Query("Select b from Book b where "
-            + "b.bookIsbn=:isbn OR "
-            + "b.bookTitle=:bookName OR "
-            + "b.authorName=:authorName OR "
-            + "b.category=:category")
-    List<Book> searchBookBy(String isbn, String bookName, String authorName, String category);
+    default List<Book> searchBookBy(Book book){
+        return searchBookBy(book.getBookIsbn(), book.getBookTitle(), book.getAuthorName(), book.getCategory() );
+    }
 
-    Book findByBookIsbn(Long bookIsbn);
+    @Query("Select b from Book b WHERE " +
+            " b.bookIsbn LIKE :#{ #isbn == null || #isbn.isEmpty() ? '%' : '%'+#isbn+'%' } " +
+            " AND b.bookTitle LIKE :#{ #bookTitle == null || #bookTitle.isEmpty() ? '%' : '%'+#bookTitle+'%' } " +
+            " AND b.authorName LIKE :#{ #authorName== null || #authorName.isEmpty() ? '%' : '%'+#authorName+'%' } "+
+            " AND b.category LIKE :#{ #category==null || #category.isEmpty() ? '%' : '%'+#category+'%' } "
+            )
+    List<Book> searchBookBy(String isbn, String bookTitle, String authorName, String category);
+
+    Optional<Book> findByBookIsbn(Long bookIsbn);
+
 }
