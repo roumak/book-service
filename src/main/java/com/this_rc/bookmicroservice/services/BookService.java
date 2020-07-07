@@ -50,7 +50,7 @@ public class BookService {
     }
 
     public Response getBookByIsbn(Long isbn){
-        Book book=theBookRepository.findByBookIsbn(isbn);
+        Book book=theBookRepository.findByBookIsbn(isbn).get();
 
         return Response.builder()
                 .book(ObjectConverterUtil.convert(book,BookDto.class))
@@ -82,8 +82,12 @@ public class BookService {
 
 
     public Response searchBooksByParameters(BookSearchDto request) {
+
+        if(request.isEmpty()){
+           return Response.builder().message("Empty request encountered, Check request field mappings").build();
+        }
         List<Book> books=theBookRepository.searchBookBy(request.getBookIsbn(),
-                request.getBookName(),
+                request.getBookTitle(),
                 request.getAuthorName(),
                 request.getCategories());
 
