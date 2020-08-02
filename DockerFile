@@ -1,0 +1,4 @@
+CMD ["mvn","package"]
+From openjdk:8-alpine
+COPY target/book-*.jar /opt/book-microservice.jar
+CMD ["java","-jar","/opt/book-microservice.jar"]
