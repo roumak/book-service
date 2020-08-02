@@ -13,7 +13,7 @@ export default class BookList extends Component {
   }
 
   componentDidMount() {
-    Axios.get("http://localhost:7090/books").then((response) => {
+    Axios.get("http://localhost:7090/api/books").then((response) => {
       this.setState({ books: response.data.books });
     });
   }

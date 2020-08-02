@@ -31,7 +31,7 @@ export default class Book extends Component {
       description: this.state.description,
     };
 
-    Axios.post("http://localhost:7090/books", book).then((response) => {
+    Axios.post("http://localhost:7090/api/books", book).then((response) => {
       this.handleResponse(response);
       this.setState(() => this.initialState);
     });
