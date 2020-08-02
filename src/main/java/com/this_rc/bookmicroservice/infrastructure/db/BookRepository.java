@@ -1,8 +1,7 @@
-package com.this_rc.bookmicroservice.repository;
+package com.this_rc.bookmicroservice.infrastructure.db;
 
-import com.this_rc.bookmicroservice.dto.BookSearchDto;
-import com.this_rc.bookmicroservice.model.Book;
-import com.this_rc.bookmicroservice.repository.BookRepositoryAPI;
+import com.this_rc.bookmicroservice.domain.Book;
+import com.this_rc.bookmicroservice.domain.BookSearchDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

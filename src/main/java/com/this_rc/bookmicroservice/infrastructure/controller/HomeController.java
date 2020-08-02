@@ -1,10 +1,10 @@
-package com.this_rc.bookmicroservice.controller;
+package com.this_rc.bookmicroservice.infrastructure.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HomeController {
+class HomeController {
     @GetMapping("/")
     String getPage(){
         return "forward:index.html";

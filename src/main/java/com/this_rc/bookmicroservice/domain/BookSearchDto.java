@@ -1,5 +1,4 @@
-package com.this_rc.bookmicroservice.dto;
-
+package com.this_rc.bookmicroservice.domain;
 
 import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
@@ -8,8 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.lang.Nullable;
-
-import javax.validation.constraints.NotNull;
 
 @ApiModel(description = "Book search request")
 @NoArgsConstructor

@@ -1,10 +1,10 @@
-package com.this_rc.bookmicroservice.controller;
+package com.this_rc.bookmicroservice.infrastructure.controller;
 
-import com.this_rc.bookmicroservice.dto.BookSearchDto;
-import com.this_rc.bookmicroservice.dto.BookDto;
-import com.this_rc.bookmicroservice.dto.InternalBookDto;
-import com.this_rc.bookmicroservice.exceptions.NoObjectFoundException;
-import com.this_rc.bookmicroservice.services.BookService;
+import com.this_rc.bookmicroservice.domain.BookSearchDto;
+import com.this_rc.bookmicroservice.domain.BookDto;
+import com.this_rc.bookmicroservice.domain.InternalBookDto;
+import com.this_rc.bookmicroservice.infrastructure.exceptions.NoObjectFoundException;
+import com.this_rc.bookmicroservice.domain.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/books")
 //@CrossOrigin(origins = "http://localhost:3000")
-public class BookRestController {
+class BookRestController {
 
     @Autowired
     private BookService theBookService;

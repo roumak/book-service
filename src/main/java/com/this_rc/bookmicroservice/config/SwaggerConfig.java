@@ -15,7 +15,7 @@ import java.util.HashSet;
 
 @Configuration
 @EnableSwagger2
-public class SwaggerConfig {
+class SwaggerConfig {
     private static final Contact AUTHOR_CONTACT;
     private static final HashSet<String> PRODUCES_CONSUMES = new HashSet<>();
 

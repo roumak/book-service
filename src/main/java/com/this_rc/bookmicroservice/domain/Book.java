@@ -1,13 +1,24 @@
-package com.this_rc.bookmicroservice.model;
+package com.this_rc.bookmicroservice.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.lang.Nullable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.sql.Date;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.lang.Nullable;
 
 @Entity
 @Table(name = "book")

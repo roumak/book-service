@@ -1,7 +1,8 @@
 package com.this_rc.bookmicroservice.repository;
 
-import com.this_rc.bookmicroservice.dto.BookSearchDto;
-import com.this_rc.bookmicroservice.model.Book;
+import com.this_rc.bookmicroservice.domain.Book;
+import com.this_rc.bookmicroservice.domain.BookSearchDto;
+import com.this_rc.bookmicroservice.infrastructure.db.BookRepositoryAPI;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
