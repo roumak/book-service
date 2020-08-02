@@ -1,9 +1,10 @@
 package com.this_rc.bookmicroservice.services;
 
-import com.this_rc.bookmicroservice.dto.InternalBookDto;
-import com.this_rc.bookmicroservice.dto.Response;
-import com.this_rc.bookmicroservice.dto.BookSearchDto;
-import com.this_rc.bookmicroservice.exceptions.NoObjectFoundException;
+import com.this_rc.bookmicroservice.domain.InternalBookDto;
+import com.this_rc.bookmicroservice.domain.Response;
+import com.this_rc.bookmicroservice.domain.BookSearchDto;
+import com.this_rc.bookmicroservice.domain.services.BookService;
+import com.this_rc.bookmicroservice.infrastructure.exceptions.NoObjectFoundException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +16,7 @@ import java.math.BigDecimal;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class BookServiceTest  {
+public class BookServiceImplTest {
 
     @Autowired
     BookService bookService;

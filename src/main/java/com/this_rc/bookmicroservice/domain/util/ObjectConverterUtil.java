@@ -1,4 +1,4 @@
-package com.this_rc.bookmicroservice.util;
+package com.this_rc.bookmicroservice.domain.util;
 
 import org.modelmapper.ModelMapper;
 

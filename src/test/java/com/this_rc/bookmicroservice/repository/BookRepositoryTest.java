@@ -1,6 +1,9 @@
 package com.this_rc.bookmicroservice.repository;
 
-import com.this_rc.bookmicroservice.model.Book;
+import com.this_rc.bookmicroservice.domain.Book;
+import com.this_rc.bookmicroservice.domain.BookSearchDto;
+import com.this_rc.bookmicroservice.infrastructure.db.BookRepositoryAPI;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +17,13 @@ import java.util.List;
 public class BookRepositoryTest {
 
     @Autowired
-    BookRepository bookRepository;
+    BookRepositoryAPI bookRepository;
 
     @Test
     public void searchBookBasedOnAttribute() {
-     Book searchedBook = Book.builder().authorName("amish").build();
-     List<Book> books = bookRepository.searchBookBy(searchedBook);
-        System.out.println(books);
+     BookSearchDto searchedBook = BookSearchDto.builder().authorName("amish").build();
+     List<Book> books = bookRepository.searchBookByParams(searchedBook);
+        Assert.assertEquals("count of books with" +
+                " Author: amish did not match",6,books.size());
     }
 }

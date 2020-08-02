@@ -1,4 +1,4 @@
-package com.this_rc.bookmicroservice.dto;
+package com.this_rc.bookmicroservice.domain;
 
 import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
