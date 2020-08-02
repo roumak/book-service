@@ -1,4 +1,4 @@
-package com.this_rc.bookmicroservice.repository.core;
+package com.this_rc.bookmicroservice.repository;
 
 import com.this_rc.bookmicroservice.dto.BookSearchDto;
 import com.this_rc.bookmicroservice.model.Book;
