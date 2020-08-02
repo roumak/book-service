@@ -24,14 +24,14 @@ public class BookServiceTest  {
     public void getAllBooks(){
         Response book = bookService.getAllBooks();
         Assert.assertEquals("Total number of books in data.sql changed",
-                8,book.getBooks().size());
+                9,book.getBooks().size());
     }
 
     @Test
     public void getBookById() throws NoObjectFoundException {
         Response book = bookService.getBookById(1L);
 
-        Assert.assertEquals("isbn number changed",Long.valueOf("1101010000000"),book.getBook().getBookIsbn());
+        Assert.assertEquals("isbn number changed","1101010000000",book.getBook().getBookIsbn());
         Assert.assertEquals("Book name changed","Scion of Iksavaku",book.getBook().getBookTitle());
         Assert.assertEquals("Author name changed","Aamish Tripathi",book.getBook().getAuthorName());
         Assert.assertEquals("Category changed","Fiction",book.getBook().getCategory());
@@ -40,12 +40,14 @@ public class BookServiceTest  {
 
     @Test
     public void SavingBook(){
-        Long ISBN= 1023234334545L;
+        String ISBN= "1023234334545";
         InternalBookDto book= InternalBookDto.builder().bookIsbn(ISBN)
                 .bookTitle("Wings of fire")
                 .authorName("Arun Tiwari")
                 .category("Autobiography")
                 .description("It is an autobography of Dr. A.P.J Abdul Kalam")
+                .costPrice(BigDecimal.valueOf(299.34))
+                .maxRetailPrice(BigDecimal.valueOf(399.00))
                 .maxRetailPrice(BigDecimal.valueOf(200.00))
                 .count(75)
                 .build();
