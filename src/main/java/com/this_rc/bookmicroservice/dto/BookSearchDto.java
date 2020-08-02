@@ -29,7 +29,7 @@ public class BookSearchDto {
     private String authorName;
 
     @Nullable
-    private String categories;
+    private String category;
 
     @Override
     public String toString() {
@@ -37,7 +37,7 @@ public class BookSearchDto {
                 "bookIsbn='" + bookIsbn + '\'' +
                 ", bookName='" + bookTitle + '\'' +
                 ", authorName='" + authorName + '\'' +
-                ", categories='" + categories + '\'' +
+                ", categories='" + category + '\'' +
                 '}';
     }
 
@@ -45,6 +45,6 @@ public class BookSearchDto {
         return  bookIsbn == null
                 && bookTitle == null
                 && authorName == null
-                && categories == null;
+                && category == null;
     }
 }

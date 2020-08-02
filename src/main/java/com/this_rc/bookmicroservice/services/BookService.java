@@ -6,7 +6,7 @@ import com.this_rc.bookmicroservice.dto.Response;
 import com.this_rc.bookmicroservice.dto.InternalBookDto;
 import com.this_rc.bookmicroservice.exceptions.NoObjectFoundException;
 import com.this_rc.bookmicroservice.model.Book;
-import com.this_rc.bookmicroservice.repository.BookRepository;
+import com.this_rc.bookmicroservice.repository.BookRepositoryAPI;
 import com.this_rc.bookmicroservice.util.ObjectConverterUtil;
 import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
@@ -23,17 +23,17 @@ import java.util.Optional;
 @Service
 public class BookService {
 
-    private BookRepository theBookRepository;
+    private BookRepositoryAPI theBookRepository;
 
     @Autowired
-    public void setBookRepository(BookRepository theBookRepository){
+    public void setBookRepository(BookRepositoryAPI theBookRepository){
          this.theBookRepository=theBookRepository;
     }
 
-    private Logger log = LoggerFactory.getLogger(BookService.class);
+    private final Logger log = LoggerFactory.getLogger(BookService.class);
 
     public Response getAllBooks() {
-        List<Book> allBooks = theBookRepository.findAll();
+        List<Book> allBooks = theBookRepository.getAllBooks();
         log.info(String.format("Retrieving all books %s", allBooks));
         List<BookDto> bookDtoList = ObjectConverterUtil.convertAll(Collections.unmodifiableList(allBooks),
                 BookDto.class);
@@ -62,7 +62,7 @@ public class BookService {
         log.info("\n" + book.toString() + "\n");
         Book outputBook = null;
         try {
-            outputBook = theBookRepository.save(book);
+            outputBook = theBookRepository.saveBook(book);
         } catch (ConstraintViolationException e) {
             throw new ValidationException("saved data does not meet required constraints");
         }
@@ -70,13 +70,13 @@ public class BookService {
     }
 
     public Response deleteBookById(long bookId) {
-        theBookRepository.deleteById(bookId);
+        theBookRepository.deleteBookById(bookId);
         return Response.builder().message("book deleted").build();
     }
 
     public Response updateBook(BookDto book) {
         log.info("updating book, bookId" + book.getBookId());
-        Book addedBook = theBookRepository.saveAndFlush(ObjectConverterUtil.convert(book, Book.class));
+        Book addedBook = theBookRepository.saveBook(ObjectConverterUtil.convert(book, Book.class));
         return Response.builder().book(ObjectConverterUtil.convert(addedBook, BookDto.class)).build();
     }
 
@@ -86,10 +86,7 @@ public class BookService {
         if(request.isEmpty()){
            return Response.builder().message("Empty request encountered, Check request field mappings").build();
         }
-        List<Book> books=theBookRepository.searchBookBy(request.getBookIsbn(),
-                request.getBookTitle(),
-                request.getAuthorName(),
-                request.getCategories());
+        List<Book> books= theBookRepository.searchBookByParams(request);
 
         return Response.builder().books(ObjectConverterUtil.convertAll(books, BookDto.class)).build();
       }
