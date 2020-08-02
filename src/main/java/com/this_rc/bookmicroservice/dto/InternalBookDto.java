@@ -25,7 +25,7 @@ public class InternalBookDto {
 
     @NotNull
     @NotEmpty
-    private Long bookIsbn;
+    private String bookIsbn;
 
     @NotNull
     @NotEmpty

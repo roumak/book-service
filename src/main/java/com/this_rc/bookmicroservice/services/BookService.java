@@ -49,7 +49,7 @@ public class BookService {
         return Response.builder().book(bookDto).build();
     }
 
-    public Response getBookByIsbn(Long isbn){
+    public Response getBookByIsbn(String isbn){
         Book book=theBookRepository.findByBookIsbn(isbn).get();
 
         return Response.builder()

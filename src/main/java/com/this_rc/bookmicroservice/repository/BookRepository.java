@@ -23,6 +23,6 @@ public interface BookRepository extends JpaRepository<Book, Long> {
             )
     List<Book> searchBookBy(String isbn, String bookTitle, String authorName, String category);
 
-    Optional<Book> findByBookIsbn(Long bookIsbn);
+    Optional<Book> findByBookIsbn(String bookIsbn);
 
 }
