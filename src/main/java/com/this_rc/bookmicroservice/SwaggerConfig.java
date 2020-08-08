@@ -1,4 +1,4 @@
-package com.this_rc.bookmicroservice.config;
+package com.this_rc.bookmicroservice;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
