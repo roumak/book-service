@@ -1,4 +1,4 @@
-package com.this_rc.bookmicroservice.domain;
+package com.this_rc.bookmicroservice.infrastructure.controller;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -14,9 +14,9 @@ import java.util.List;
 @ToString
 @Builder
 @Getter
-public class Response {
-    private List<BookDto> books;
-    private BookDto book;
+class Response {
+    private List<ResponseBookDto> books;
+    private ResponseBookDto book;
     private HttpStatus httpStatus;
     private String message;
 }

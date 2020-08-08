@@ -1,4 +1,4 @@
-package com.this_rc.bookmicroservice.domain;
+package com.this_rc.bookmicroservice.infrastructure.controller;
 
 import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
@@ -9,24 +9,19 @@ import lombok.ToString;
 import org.springframework.lang.Nullable;
 
 @ApiModel(description = "Book search request")
-@NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Getter
-@ToString
-public class BookSearchDto {
+class RequestBookSearchParams {
+    @Nullable
+    public final String bookIsbn;
 
     @Nullable
-    private String bookIsbn;
+    public final String bookTitle;
 
     @Nullable
-    private String bookTitle;
+    public final String authorName;
 
     @Nullable
-    private String authorName;
-
-    @Nullable
-    private String category;
+    public final String category;
 
     @Override
     public String toString() {
