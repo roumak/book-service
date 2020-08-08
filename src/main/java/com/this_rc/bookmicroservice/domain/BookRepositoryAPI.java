@@ -1,7 +1,4 @@
-package com.this_rc.bookmicroservice.infrastructure.db;
-
-import com.this_rc.bookmicroservice.domain.Book;
-import com.this_rc.bookmicroservice.domain.BookSearchDto;
+package com.this_rc.bookmicroservice.domain;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,7 +7,7 @@ public interface BookRepositoryAPI {
 
     List<Book> getAllBooks();
 
-    List<Book> searchBookByParams(BookSearchDto book);
+    List<Book> searchBookByParams(BookSearchParams book);
 
     Book saveBook(Book convert);
 
