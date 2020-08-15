@@ -1,7 +1,8 @@
 package com.this_rc.bookmicroservice.infrastructure.db;
 
 import com.this_rc.bookmicroservice.domain.Book;
-import com.this_rc.bookmicroservice.domain.BookSearchDto;
+import com.this_rc.bookmicroservice.domain.BookRepositoryAPI;
+import com.this_rc.bookmicroservice.infrastructure.controller.request.RequestBookSearchParams;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -17,7 +18,7 @@ interface BookRepository extends BookRepositoryAPI, JpaRepository<Book, Long> {
     }
 
     @Override
-    default List<Book> searchBookByParams(BookSearchDto book){
+    default List<Book> searchBookByParams(RequestBookSearchParams book){
         return searchBookBy(book.getBookIsbn(), book.getBookTitle(), book.getAuthorName(), book.getCategory() );
     }
 
@@ -31,6 +32,7 @@ interface BookRepository extends BookRepositoryAPI, JpaRepository<Book, Long> {
 
     @Override default Book saveBook(Book book){
        return saveAndFlush(book);
+
     }
 
     @Override default void deleteBookById(long id){

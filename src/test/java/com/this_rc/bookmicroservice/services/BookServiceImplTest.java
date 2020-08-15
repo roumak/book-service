@@ -1,9 +1,9 @@
 package com.this_rc.bookmicroservice.services;
 
-import com.this_rc.bookmicroservice.domain.InternalBookDto;
-import com.this_rc.bookmicroservice.domain.Response;
-import com.this_rc.bookmicroservice.domain.BookSearchDto;
-import com.this_rc.bookmicroservice.domain.services.BookService;
+import com.this_rc.bookmicroservice.infrastructure.controller.response.InternalBookDto;
+import com.this_rc.bookmicroservice.infrastructure.controller.response.Response;
+import com.this_rc.bookmicroservice.infrastructure.controller.request.RequestBookSearchParams;
+import com.this_rc.bookmicroservice.domain.BookService;
 import com.this_rc.bookmicroservice.infrastructure.exceptions.NoObjectFoundException;
 import org.junit.Assert;
 import org.junit.Test;
@@ -62,11 +62,11 @@ public class BookServiceImplTest {
 
     @Test
     public void  searchBooksByParameters(){
-        BookSearchDto bookSearchDto = BookSearchDto.builder()
+        RequestBookSearchParams requestBookSearchParams = RequestBookSearchParams.builder()
                 .authorName("Aamish Tripathi")
                 .build();
 
-        Response response=bookService.searchBooksByParameters(bookSearchDto);
+        Response response=bookService.searchBooksByParameters(requestBookSearchParams);
         System.out.println(response);
     }
 

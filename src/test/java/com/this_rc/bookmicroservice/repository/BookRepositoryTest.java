@@ -1,8 +1,8 @@
 package com.this_rc.bookmicroservice.repository;
 
 import com.this_rc.bookmicroservice.domain.Book;
-import com.this_rc.bookmicroservice.domain.BookSearchDto;
-import com.this_rc.bookmicroservice.infrastructure.db.BookRepositoryAPI;
+import com.this_rc.bookmicroservice.infrastructure.controller.request.RequestBookSearchParams;
+import com.this_rc.bookmicroservice.domain.BookRepositoryAPI;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,7 +21,7 @@ public class BookRepositoryTest {
 
     @Test
     public void searchBookBasedOnAttribute() {
-     BookSearchDto searchedBook = BookSearchDto.builder().authorName("amish").build();
+     RequestBookSearchParams searchedBook = RequestBookSearchParams.builder().authorName("amish").build();
      List<Book> books = bookRepository.searchBookByParams(searchedBook);
         Assert.assertEquals("count of books with" +
                 " Author: amish did not match",6,books.size());
