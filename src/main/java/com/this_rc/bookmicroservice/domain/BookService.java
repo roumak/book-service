@@ -1,22 +1,23 @@
 package com.this_rc.bookmicroservice.domain;
 
-import com.this_rc.bookmicroservice.infrastructure.exceptions.NoObjectFoundException;
+
+import com.this_rc.bookmicroservice.infrastructure.exceptions.NoRecordsFoundException;
 
 import java.util.List;
 
-public interface BookService {
+interface BookService {
 
-    List<Book> getAllBooks();
+    List<BookQueryDto> getAllBooks();
 
-    Book getBookById(Long bookId) throws NoObjectFoundException;
+    BookQueryDto getBookById(Long bookId) throws NoRecordsFoundException;
 
-    Book getBookByIsbn(String isbn) throws NoObjectFoundException;
+    BookQueryDto getBookByIsbn(String isbn) throws NoRecordsFoundException;
 
-    Book saveBook(Book newBook);
+    BookQueryDto saveBook(BookCommandDto newBook);
 
     void deleteBookById(long bookId);
 
-    Book updateBook(Book book);
+    BookQueryDto updateBook(BookCommandDto book);
 
-    List<Book> searchBooksByParameters(BookSearchParams request);
+    List<BookQueryDto> searchBooksByParameters(BookSearchParams request);
 }

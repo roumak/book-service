@@ -1,7 +1,9 @@
 package com.this_rc.bookmicroservice.domain;
 
-import com.this_rc.bookmicroservice.infrastructure.exceptions.NoObjectFoundException;
-import com.this_rc.bookmicroservice.domain.util.ObjectConverterUtil;
+import com.this_rc.bookmicroservice.util.ObjectConverterUtil;
+import com.this_rc.bookmicroservice.infrastructure.db.BookRepository;
+import com.this_rc.bookmicroservice.infrastructure.db.QuerySearchParams;
+import com.this_rc.bookmicroservice.infrastructure.exceptions.NoRecordsFoundException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,15 +12,16 @@ import org.springframework.stereotype.Service;
 
 import javax.validation.ValidationException;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
 class BookServiceImpl implements BookService {
 
-    private BookRepositoryAPI theBookRepository;
+    private BookRepository theBookRepository;
 
     @Autowired
-    BookServiceImpl setBookRepository(BookRepositoryAPI theBookRepository){
+    BookServiceImpl setBookRepository(BookRepository theBookRepository){
          this.theBookRepository=theBookRepository;
          return this;
     }
@@ -26,36 +29,36 @@ class BookServiceImpl implements BookService {
     private final Logger log = LoggerFactory.getLogger(BookServiceImpl.class);
 
     @Override
-    public List<Book> getAllBooks() {
-        List<Book> allBooks = theBookRepository.getAllBooks();
+    public List<BookQueryDto> getAllBooks() {
+        List<BookQueryDto> allBooks = theBookRepository.getAllBooks();
         log.info(String.format("Retrieving all books %s", allBooks));
         return allBooks;
     }
 
     @Override
-    public Book getBookById(Long bookId) throws NoObjectFoundException {
+    public BookQueryDto getBookById(Long bookId) throws NoRecordsFoundException {
         return theBookRepository
-                .findById(bookId)
+                .getBookById(bookId)
                 .orElseThrow(
-                        () -> new NoObjectFoundException("No object found with this book id"));
+                        () -> new NoRecordsFoundException("No object found with this book id"));
     }
 
     @Override
-    public Book getBookByIsbn(String isbn) throws NoObjectFoundException{
+    public BookQueryDto getBookByIsbn(String isbn) throws NoRecordsFoundException {
         return theBookRepository
                 .findByBookIsbn(isbn)
                 .orElseThrow(
-                        ()-> new NoObjectFoundException("No object found with this isbn"));
+                        ()-> new NoRecordsFoundException("No object found with this isbn"));
 
     }
 
     @Override
-    public Book saveBook(Book newBook) {
-        Book outputBook;
+    public BookQueryDto saveBook(BookCommandDto newBook) {
+        BookQueryDto outputBook;
         try {
             outputBook = theBookRepository.saveBook(newBook);
         } catch (ConstraintViolationException e) {
-            throw new ValidationException("saved data does not meet required constraints");
+            throw new ValidationException("Book data does not meet required constraints");
         }
         return outputBook;
     }
@@ -66,20 +69,17 @@ class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book updateBook(Book book) {
+    public BookQueryDto updateBook(BookCommandDto book) {
         log.info("updating book, bookId" + book.getBookId());
        return theBookRepository.saveBook(book);
     }
 
 
     @Override
-    public List<Book> searchBooksByParameters(BookSearchParams request) {
-
-        if(request.isEmpty()){
-
-        }
-       return theBookRepository.searchBookByParams(request);
-
+    public List<BookQueryDto> searchBooksByParameters(BookSearchParams searchParams) {
+       return Optional.of(searchParams)
+                .map(params-> ObjectConverterUtil.convert(params, QuerySearchParams.class))
+                .map(theBookRepository::searchBookByParams).get();
     }
 
 }

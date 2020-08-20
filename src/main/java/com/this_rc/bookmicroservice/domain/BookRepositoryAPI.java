@@ -1,19 +1,21 @@
 package com.this_rc.bookmicroservice.domain;
 
+import com.this_rc.bookmicroservice.infrastructure.db.QuerySearchParams;
+
 import java.util.List;
 import java.util.Optional;
 
 public interface BookRepositoryAPI {
 
-    List<Book> getAllBooks();
+    List<BookQueryDto> getAllBooks();
 
-    List<Book> searchBookByParams(BookSearchParams book);
+    List<BookQueryDto> searchBookByParams(QuerySearchParams book);
 
-    Book saveBook(Book convert);
+    BookQueryDto saveBook(BookCommandDto newBook);
 
     void deleteBookById(long bookId);
 
-    Optional<Book> findById(Long bookId);
+    Optional<BookQueryDto> getById(Long bookId);
 
-    Optional<Book> findByBookIsbn(String bookIsbn);
+    Optional<BookQueryDto> findByBookIsbn(String bookIsbn);
 }

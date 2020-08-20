@@ -1,4 +1,4 @@
-package com.this_rc.bookmicroservice.domain;
+package com.this_rc.bookmicroservice.infrastructure.db;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -29,7 +29,7 @@ import org.springframework.lang.Nullable;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Book {
+class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "book_id")
