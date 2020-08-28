@@ -1,6 +1,6 @@
 package com.this_rc.bookmicroservice.infrastructure.controller;
 
-import com.this_rc.bookmicroservice.infrastructure.exceptions.NoObjectFoundException;
+import com.this_rc.bookmicroservice.infrastructure.exceptions.NoRecordsFoundException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -12,11 +12,11 @@ import javax.validation.ValidationException;
 @ControllerAdvice
 class ControllerExceptionHandler {
 
-    @ExceptionHandler
-    @ResponseStatus(HttpStatus.EXPECTATION_FAILED)
-    public String exceptionHandler(Exception e) {
-        return "A BIIIG EXCEPPTIONNNNNN!!!!!!!!!!!!";
-    }
+//    @ExceptionHandler
+//    @ResponseStatus(HttpStatus.EXPECTATION_FAILED)
+//    public String exceptionHandler(Exception e) {
+//        return "A BIIIG EXCEPPTIONNNNNN!!!!!!!!!!!!";
+//    }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -26,7 +26,7 @@ class ControllerExceptionHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public String NoObjectFoundExceptionHandler(NoObjectFoundException e) {
+    public String NoObjectFoundExceptionHandler(NoRecordsFoundException e) {
         return e.getLocalizedMessage();
     }
 

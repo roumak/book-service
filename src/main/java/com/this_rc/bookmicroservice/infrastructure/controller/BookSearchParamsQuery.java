@@ -10,7 +10,7 @@ import org.springframework.lang.Nullable;
 
 @ApiModel(description = "Book search request")
 @AllArgsConstructor
-class RequestBookSearchParams {
+public class BookSearchParamsQuery {
     @Nullable
     public final String bookIsbn;
 

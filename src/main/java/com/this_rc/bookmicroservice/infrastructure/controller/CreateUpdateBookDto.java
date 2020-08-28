@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 
 @ApiModel(description = "Book details")
 @AllArgsConstructor
-class RequestBookDto {
+public class CreateUpdateBookDto {
     @NotNull
     @NotEmpty
     public Long bookId;
