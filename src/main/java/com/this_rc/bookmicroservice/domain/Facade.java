@@ -6,6 +6,8 @@ import com.this_rc.bookmicroservice.infrastructure.controller.CreateUpdateBookDt
 import com.this_rc.bookmicroservice.infrastructure.controller.NoSearchResultsException;
 import com.this_rc.bookmicroservice.infrastructure.exceptions.NoRecordsFoundException;
 import com.this_rc.bookmicroservice.util.ObjectConverterUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +20,7 @@ import static com.this_rc.bookmicroservice.util.ObjectConverterUtil.convert;
 @Component
 public class Facade {
 
+    Logger log = LoggerFactory.getLogger(Facade.class);
     private final BookService bookService;
 
     @Autowired
@@ -49,9 +52,11 @@ public class Facade {
     public List<BookQueryAPI> searchBookByParams(BookSearchParamsQuery searchParams){
         return Optional
                 .of(searchParams)
-                .map(dto -> convert(dto,BookSearchParams.class ))
+                .map(dto ->{ System.out.println("Before: "+dto); return dto;})
+                .map(dto -> ObjectConverterUtil.convert(dto,BookSearchParams.class ))
+                .map(dto ->{ System.out.println("After: "+dto); return dto;})
                 .map(bookService::searchBooksByParameters)
-                .map(dtos-> convert(dtos,BookQueryAPI.class))
+                .map(dtos-> ObjectConverterUtil.convert(dtos,BookQueryAPI.class))
                 .orElseThrow(()-> new NoSearchResultsException("No search results found"));
     }
 

@@ -4,6 +4,8 @@ import com.this_rc.bookmicroservice.domain.BookCommandDto;
 import com.this_rc.bookmicroservice.domain.BookQueryDto;
 import com.this_rc.bookmicroservice.infrastructure.controller.BookQueryAPI;
 import com.this_rc.bookmicroservice.util.ObjectConverterUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -15,12 +17,15 @@ import java.util.Optional;
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
 
+    Logger log = LoggerFactory.getLogger(BookRepository.class);
+
     @Query("Select NEW com.this_rc.bookmicroservice.domain.BookQueryDto(" +
             "b.bookIsbn, b.bookTitle, b.authorName, b.type, b.maxRetailPrice," +
             "b.discount, b.category, b.description, b.bookCount) from Book b")
     List<BookQueryDto> getAllBooks();
 
     default List<BookQueryDto> searchBookByParams(QuerySearchParams book){
+        log.info("book search"+book);
         return searchBookBy(book.getBookIsbn(), book.getBookTitle(), book.getAuthorName(), book.getCategory() );
     }
 
@@ -51,7 +56,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
             "b.bookIsbn, b.bookTitle, b.authorName, b.type, b.maxRetailPrice," +
             "b.discount, b.category, b.description, b.bookCount) " +
             "from Book b where b.bookIsbn = bookIsbn  ")
-    Optional<BookQueryDto> findByBookIsbn(String bookIsbn);
+    BookQueryDto findByBookIsbn(String bookIsbn);
 
     default void deleteBookById(long id){
          deleteById(id);

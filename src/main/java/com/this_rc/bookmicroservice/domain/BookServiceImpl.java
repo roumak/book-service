@@ -21,9 +21,8 @@ class BookServiceImpl implements BookService {
     private BookRepository theBookRepository;
 
     @Autowired
-    BookServiceImpl setBookRepository(BookRepository theBookRepository){
+    void setBookRepository(BookRepository theBookRepository){
          this.theBookRepository=theBookRepository;
-         return this;
     }
 
     private final Logger log = LoggerFactory.getLogger(BookServiceImpl.class);
@@ -46,9 +45,9 @@ class BookServiceImpl implements BookService {
     @Override
     public BookQueryDto getBookByIsbn(String isbn) throws NoRecordsFoundException {
         return theBookRepository
-                .findByBookIsbn(isbn)
-                .orElseThrow(
-                        ()-> new NoRecordsFoundException("No object found with this isbn"));
+                .findByBookIsbn(isbn);
+//                .orElseThrow(
+//                        ()-> new NoRecordsFoundException("No object found with this isbn"));
 
     }
 
@@ -77,7 +76,8 @@ class BookServiceImpl implements BookService {
 
     @Override
     public List<BookQueryDto> searchBooksByParameters(BookSearchParams searchParams) {
-       return Optional.of(searchParams)
+       log.info("search params"+searchParams);
+        return Optional.of(searchParams)
                 .map(params-> ObjectConverterUtil.convert(params, QuerySearchParams.class))
                 .map(theBookRepository::searchBookByParams).get();
     }

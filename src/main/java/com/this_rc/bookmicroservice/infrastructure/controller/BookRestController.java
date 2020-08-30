@@ -1,6 +1,8 @@
 package com.this_rc.bookmicroservice.infrastructure.controller;
 
 import com.this_rc.bookmicroservice.domain.Facade;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/books")
 class BookRestController {
+
+    Logger log = LoggerFactory.getLogger(BookRestController.class);
 
     @Autowired
     private Facade domainFacade;
@@ -24,6 +28,7 @@ class BookRestController {
 
     @PostMapping("/search")
     public ResponseEntity<Object> searchBooksByParameters(@RequestBody BookSearchParamsQuery request){
+        log.info("search request: "+request);
         return  ResponseEntity.ok(domainFacade.searchBookByParams(request));
     }
 

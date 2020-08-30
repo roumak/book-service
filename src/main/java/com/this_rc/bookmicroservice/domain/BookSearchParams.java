@@ -1,38 +1,25 @@
 package com.this_rc.bookmicroservice.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
-@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
+@ToString
 @Component
 class BookSearchParams {
 
-    @Nullable
-    private final String bookIsbn;
+    private String bookIsbn;
 
-    @Nullable
-    private final String bookTitle;
+    private String bookTitle;
 
-    @Nullable
-    private final String authorName;
+    private String authorName;
 
-    @Nullable
-    private final String category;
-
-    public String getBookIsbn() {
-        return bookIsbn;
-    }
-
-    public String getBookTitle() {
-        return bookTitle;
-    }
-
-    public String getAuthorName() {
-        return authorName;
-    }
-
-    public String getCategory() {
-        return category;
-    }
+    private String category;
 }

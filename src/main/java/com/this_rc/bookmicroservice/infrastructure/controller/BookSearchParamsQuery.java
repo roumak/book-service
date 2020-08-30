@@ -5,33 +5,24 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 import org.springframework.lang.Nullable;
 
 @ApiModel(description = "Book search request")
-@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@ToString
 public class BookSearchParamsQuery {
-    @Nullable
-    public final String bookIsbn;
 
-    @Nullable
-    public final String bookTitle;
+    public  String bookIsbn;
 
-    @Nullable
-    public final String authorName;
+    public  String bookTitle;
 
-    @Nullable
-    public final String category;
+    public  String authorName;
 
-    @Override
-    public String toString() {
-        return "BookSearchRequest {" +
-                "bookIsbn='" + bookIsbn + '\'' +
-                ", bookName='" + bookTitle + '\'' +
-                ", authorName='" + authorName + '\'' +
-                ", categories='" + category + '\'' +
-                '}';
-    }
+    public String category;
+
 
     public boolean isEmpty() {
         return  bookIsbn == null

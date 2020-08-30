@@ -28,7 +28,7 @@ public class BookQueryDto {
 
     private int bookCount;
 
-    BookQueryDto(String bookIsbn, String bookTitle, String authorName, String type, BigDecimal maxRetailPrice, BigDecimal discount, String category, String description, int bookCount) {
+   public BookQueryDto(String bookIsbn, String bookTitle, String authorName, String type, BigDecimal maxRetailPrice, BigDecimal discount, String category, String description, int bookCount) {
         this.bookIsbn = bookIsbn;
         this.bookTitle = bookTitle;
         this.authorName = authorName;
